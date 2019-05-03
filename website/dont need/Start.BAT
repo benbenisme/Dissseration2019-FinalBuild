@@ -1,1 +1,0 @@
-start chrome "C:\dissertation\website\index.html"
