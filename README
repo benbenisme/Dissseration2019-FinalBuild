@@ -1,0 +1,4 @@
+The terribly named test1.js contains the main portion of the code/functionality
+I should have modularised it from the start, but due to illness and time constraints I never had the chance, sorry.
+
+Certain levels required their own seperate JavaScript files but these are named more approriately.
