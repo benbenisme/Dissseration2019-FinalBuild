@@ -1,0 +1,61 @@
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+        .top-buffer {
+            margin-top: 20px;
+        }
+
+        .backgroundColour {
+            background-color: rgb(255, 254, 254);
+        }
+
+        .centerCon {
+            text-align: center;
+        }
+
+        #mainArea {
+            padding-right: 2vw;
+            padding-left: 2vw;
+        }
+
+        #levelDetailsArea {
+            border-radius: 25px;
+            height: 50vh;
+            width: 40vw;
+            border: 1px solid black;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-content: center;
+            padding: 2vw;
+            
+        }
+        #levelDetailsArea h1{
+            padding-bottom: 5vh;
+        }
+
+        #containerDetails {
+            display: inline-block;
+        }
+        #playButton {
+            border-radius: 25px;
+            width: 40vw;
+            border: 1px solid black;
+        }
+        .h1{
+            padding-left: 25%;
+            padding-right: 25%;
+        }
+
+        .levelButton{
+            width: 100%;
+        }
+
+        .active {
+            background-color: green !important;
+            color: white !important;
+        }

@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <!-- google icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- google font -->
+  <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+
+  <link rel="stylesheet" href="levelStyles.css">
+
+  <script src="./blockly/blockly_compressed.js"></script>
+  <script src="./blockly/blocks_compressed.js"></script>
+  <script src="./blockly/javascript_compressed.js"></script>
+  <script src="./blockly/msg/js/en.js"></script>
+  <script src="./NeilFraser-JS-Interpreter-208d182/acorn_interpreter.js"></script>
+
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="modal font" tabindex="-1" role="dialog" id="helpModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Help</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Specific Text about the level</p>
+          <p>Maybe stuff about blocks</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal font" tabindex="-1" role="dialog" id="completionModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Congratulations</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Click to move to next level</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id='modalNextLevelButton'>Next
+            Level!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-inverse font">
+    <div class="container-fluid">
+      <button class="btn btn-secondary navbar-btn material-icons" id="homeButton">home</button>
+      <button class="btn btn-secondary navbar-btn material-icons" id="runButton">play_arrow</button>
+      <button class="btn btn-secondary navbar-btn material-icons" id="stepButton">skip_next</button>
+      <button class="btn btn-secondary navbar-btn material-icons" id="resetButton">replay</button>
+      <ul class="nav navbar-nav navbar-right">
+        <p class="navbar-text" id="usernameSlot">greg the tester</p>
+        <button class="btn btn-secondary navbar-btn material-icons" id="previousButton">keyboard_arrow_left</button>
+        <button class="btn btn-secondary navbar-btn material-icons" id="nextButton">keyboard_arrow_right</button>
+        <button class="btn btn-secondary navbar-btn material-icons" id="helpButton">help</button>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" class="container-fluid font">
+    <div class="row firstRow">
+      <div class="col-sm-5">
+        <!-- for workspace and toolbox -->
+        <p>Move the book from index 0 to index 1</p>
+        <div class="row">
+          <div class="blocklyDiv" id="blocklyDiv"></div>
+        </div>
+        <div class="row">
+          <div class="container varArea">
+            <div class="row rowVars" id="variableDisplayArea">
+                
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="errorArea" id="errorArea">
+              <h3 id="errorAreaText"></h3>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="errorHighlight" id="errorhighlight"><button class="btn btn-secondary errorHighlightButton"
+                id="errorHighlightButton"><h5>Highlight the first error of the run</h5></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <!-- for shelf and images -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="imageDiv" id="output" disabled="disabled">
+              <table class="center centered imageTable" id="movementTable">
+                <tr>
+                  <td id='handPosition1'></td>
+                  <td id='handPosition2'></td>
+                </tr>
+                <tr class="bookRow">
+                  <td id='liftedPosition1'></td>
+                  <td id='liftedPosition2'></td>
+                </tr>
+                <tr class="bookRow">
+                  <td id='shelfPosition1'></td>
+                  <td id='shelfPosition2'></td>
+                </tr>
+              </table>
+              <img class="shelfImg" src="./media/shelf.svg" />
+            </div>
+          </div>
+          <div class="row">
+            <div id="indexDisplay" disabled="disabled" style="display: inline-block; height: 80px; width: 100%;">
+              <table class="center indexTable" id="indexTable" style="height: auto;">
+                <tr>
+                  <td class="text-center" id='index0'>
+                    <h1>0</h1>
+                  </td>
+                  <td class="text-center" id='index1'>
+                    <h1>1</h1>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+      <block type="select_hand_position"></block>
+      <block type="grab_book"></block>
+      <block type="place_book"></block>
+    </category>
+  </xml>
+
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+      {
+        media: 'https://blockly-demo.appspot.com/static/media/',
+        toolbox: document.getElementById('toolbox'),
+        scrollbars: true,
+        zoom:
+        {
+          controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2
+        },
+        trashcan: true
+      });        
+  </script>
+  <script src="canvas.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="./blockly/blockly_compressed.js"></script>
+    <script src="./blockly/blocks_compressed.js"></script>
+    <script src="./blockly/javascript_compressed.js"></script>
+    <script src="./blockly/msg/js/en.js"></script>
+    <script src="./NeilFraser-JS-Interpreter-208d182/acorn_interpreter.js"></script>
+
+    <style>
+        table {
+            table-layout: fixed;
+        }
+
+        table.center {
+            width: 68%;
+            margin-left: 16%;
+            margin-right: 16%;
+        }
+
+        .center td {
+            height: 33%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal" tabindex="-1" role="dialog" id="helpModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Specific Text about the level</p>
+                    <p>Maybe stuff about blocks</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="completionModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Congratulations</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Click to move to next level</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id='modalNextLevelButton'>Next
+                        Level!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <button class="btn btn-secondary navbar-btn material-icons" id="homeButton">home</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="runButton">play_arrow</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="stepButton">skip_next</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="resetButton">replay</button>
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-secondary navbar-btn material-icons"
+                    id="previousButton">keyboard_arrow_left</button>
+                <button class="btn btn-secondary navbar-btn material-icons"
+                    id="nextButton">keyboard_arrow_right</button>
+                <button class="btn btn-secondary navbar-btn material-icons" id="helpButton">help</button>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <!-- for workspace and toolbox -->
+                <p>Indecicivness!</p>
+                <p>Using both for loops, move along the shelf and grab and swap three times</p>
+                <div id="blocklyDiv" style="display: inline-block; height: 480px; width: 100%"></div>
+            </div>
+            <div class="col-sm-8">
+                <!-- for shelf and images -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div id="output" disabled="disabled"
+                            style="display: inline-block; height: 480px; width: 100%; border: 1px solid black">
+                            <table class="center" id="movementTable" style="height: 460px;">
+                                <tr>
+                                    <td id='handPosition1'></td>
+                                    <td id='handPosition2'></td>
+                                    <td id='handPosition3'></td>
+                                    <td id='handPosition4'></td>
+                                    <td id='handPosition5'></td>
+                                </tr>
+                                <tr>
+                                    <td id='liftedPosition1'></td>
+                                    <td id='liftedPosition2'></td>
+                                    <td id='liftedPosition3'></td>
+                                    <td id='liftedPosition4'></td>
+                                    <td id='liftedPosition5'></td>
+                                </tr>
+                                <tr>
+                                    <td id='shelfPosition1'></td>
+                                    <td id='shelfPosition2'></td>
+                                    <td id='shelfPosition3'></td>
+                                    <td id='shelfPosition4'></td>
+                                    <td id='shelfPosition5'></td>
+                                </tr>
+                            </table>
+                            <img style="display:block; height: auto;" src="./media/shelf.svg" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="indexDisplay" disabled="disabled"
+                            style="display: inline-block; height: 80px; width: 100%;">
+                            <table class="center indexTable" id="indexTable" style="height: auto;">
+                                <tr>
+                                    <td class="text-center" id='index0'>0</td>
+                                    <td class="text-center" id='index1'>1</td>
+                                    <td class="text-center" id='index2'>2</td>
+                                    <td class="text-center" id='index3'>3</td>
+                                    <td class="text-center" id='index4'>4</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Loops" colour="%{BKY_LOGIC_HUE}">
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+                    <value name="FROM">
+                        <block type="math_number">
+                            <field name="NUM">1</field>
+                        </block>
+                    </value>
+                    <value name="TO">
+                        <block type="math_number">
+                            <field name="NUM">10</field>
+                        </block>
+                    </value>
+                    <value name="BY">
+                        <block type="math_number">
+                            <field name="NUM">1</field>
+                        </block>
+                    </value>
+                </block>
+        </category>
+        <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+            <block type="variables_get">
+                <field name="VAR">i</field>
+            </block>
+            <block type="variables_set">
+                <field name="VAR">i</field>
+            </block>
+            <block type="math_change">
+                <field name="VAR">i</field>
+            </block>
+            <block type="controls_if"></block>
+            <block type="logic_compare">
+                <field name="OP">EQ</field>
+            </block>
+            <block type="math_number">
+                <field name="NUM">10</field>
+            </block>
+        </category>
+        <category name="Hands" colour="%{BKY_LOGIC_HUE}">
+            <block type="move_hand"></block>
+        </category>
+        <category name="Books" colour="%{BKY_LOGIC_HUE}">
+            <block type="swap_books"></block>
+        </category>
+    </xml>
+
+    <script>
+        var workspace = Blockly.inject('blocklyDiv',
+            {
+                media: 'https://blockly-demo.appspot.com/static/media/',
+                toolbox: document.getElementById('toolbox'),
+                scrollbars: true,
+                zoom:
+                {
+                    controls: true,
+                    wheel: true,
+                    startScale: 1.0,
+                    maxScale: 3,
+                    minScale: 0.3,
+                    scaleSpeed: 1.2
+                },
+                trashcan: true
+            });        
+    </script>
+    <script src="test1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  
+  <script src="./blockly/blockly_compressed.js"></script>
+  <script src="./blockly/blocks_compressed.js"></script>
+  <script src="./blockly/javascript_compressed.js"></script>
+  <script src="./blockly/msg/js/en.js"></script>
+  <script src="customblocks.js"></script>  
+  <script src="./NeilFraser-JS-Interpreter-208d182/acorn_interpreter.js"></script>
+  
+<style>
+   body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    table {      
+      table-layout: fixed;
+    }    
+
+    table.center {
+      width:68%; 
+      margin-left:16%; 
+      margin-right:16%;
+    }
+
+    .center td {
+      height: 33%;
+    }
+  </style>
+  <p>
+    Move the book from index 0 to index 1 !
+  </p>
+</head>
+<body>
+  <p>    
+    <button onclick="runCode(1)" id="runButton">Run</button>
+    <button onclick="stepExecution(1)" id="stepButton">Step</button>
+    <button onclick="reset()" id="resetButton">Reset</button>
+  </p>
+
+  <div style="width: 100%">
+    <div id="blocklyDiv"
+        style="display: inline-block; height: 480px; width: 58%"></div>
+    <div id="output" disabled="disabled"
+    style="display: inline-block; height: 480px; width: 38%; border: 1px solid black">    
+    <table class="center" id="movementTable" style="height: 460px;">
+      <tr>
+        <td id='handPosition1'><img style="display:block;" width="100%" height="100%" src="./media/left_hand.svg" /></td>
+        <td id='handPosition2'></td>
+      </tr>
+      <tr>
+        <td id='liftedPosition1'></td>
+        <td id='liftedPosition2'></td>      
+      </tr>
+      <tr>
+        <td id='shelfPosition1'><img style="display:block;" width="100%" height="100%" src="./media/book_1.svg" /></td>
+        <td id='shelfPosition2'></td>
+      </tr>
+    </table>    
+    <img style="display:block; height: auto;" src="./media/shelf.svg" />     
+  </div>
+    <textarea id="lastError" disabled ="disabled"
+            style="display: inline-block; height:60px; width:38%;">
+    </textarea>
+  </div>
+  <xml id="toolbox" style="display: none">      
+    <block type="select_hand_position"></block>   
+    <block type="grab_book"></block> 
+    <block type="place_book"></block>
+  </xml>
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+    {
+    media: 'https://blockly-demo.appspot.com/static/media/',
+    toolbox: document.getElementById('toolbox'),
+      scrollbars: true,
+      zoom:
+        {controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2},
+      trashcan: true
+    });
+    var outputArea = document.getElementById('output');
+    var stepButton = document.getElementById('stepButton');
+    var runButton = document.getElementById('runButton');
+    var lastErrorArea = document.getElementById('lastError');
+    var table = document.getElementById('movementTable');
+    generateCodeAndLoadIntoInterpreter();
+    setupOnStart(1);
+    workspace.addChangeListener(function(event) {
+      if (!(event instanceof Blockly.Events.Ui)) {
+      // Something changed. Parser needs to be reloaded.
+      generateCodeAndLoadIntoInterpreter();
+      }
+    });    
+  </script>   
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- google font -->
+    <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="levelStyles.css">
+    <link rel="stylesheet" href="home.css">
+
+    <script src="./blockly/blockly_compressed.js"></script>
+    <script src="./blockly/blocks_compressed.js"></script>
+    <script src="./blockly/javascript_compressed.js"></script>
+    <script src="./blockly/msg/js/en.js"></script>
+    <script src="./NeilFraser-JS-Interpreter-208d182/acorn_interpreter.js"></script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <main role="main" class="container-fluid backgroundColour font" id="mainArea">
+        <div class="row">
+            <div class="jumbotron jumbotron-fluid font justify-content-center backgroundColour">
+                <div class="container-fluid text-center">
+                    <h1>Level Selection</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 " id="subparent">
+                <div class="container-fluid" id="parent">
+                    <!-- Tutorial -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="tutorialButton"
+                                >Tutorial</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL ONE ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelOneButton"
+                                >Level
+                                1</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL TWO ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelTwoButton"
+                                >Level
+                                2</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL THREE ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelThreeButton"
+                                >Level
+                                3</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL FOUR ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelFourButton"
+                                >Level
+                                4</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL FIVE ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelFiveButton"
+                                >Level
+                                5</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL SIX ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelSixButton"
+                                >Level
+                                6</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL SEVEN ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelSevenButton"
+                                >Level 7</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL EIGHT ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelEightButton"
+                                >Level
+                                8</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL NINE ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelNineButton"
+                                >Level
+                                9</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL TEN ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelTenButton"
+                                >Level
+                                10</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL ELEVEN ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelElevenButton"
+                                >Level
+                                11</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL TWELVE ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelTwelveButton"
+                                >Level
+                                12</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL THIRTEEN ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelThirteenButton"
+                                >Level
+                                13</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>
+                    <!-- LEVEL FOURTEEN ROW -->
+                    <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelFourteenButton"
+                                >Level
+                                14</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>    
+                     <!-- LEVEL Fifthteen ROW -->
+                     <div class="row top-buffer">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <button class="btn btn-secondary font levelButton" id="levelFifthteenButton"
+                                >Level
+                                15</button>
+                        </div>
+                        <div class="col-sm-4 checkmark">
+                            <img style="display:block; height: auto" src="./media/checkmark.svg" />
+                        </div>
+                    </div>                         
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <!-- for shelf and images -->
+                <div class="container" id="containerDetails">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="levelDetailsArea">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row font top-buffer">
+                        <button class="btn btn-success" id="playButton">
+                            <h2>Click To Play</h2>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <script src="home.js"></script>
+</body>
+
+</html>

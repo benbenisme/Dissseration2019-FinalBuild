@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- google font -->
+    <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+
+    <link rel="stylesheet" href="levelStyles.css">
+
+    <script src="./blockly/blockly_compressed.js"></script>
+    <script src="./blockly/blocks_compressed.js"></script>
+    <script src="./blockly/javascript_compressed.js"></script>
+    <script src="./blockly/msg/js/en.js"></script>
+    <script src="./NeilFraser-JS-Interpreter-208d182/acorn_interpreter.js"></script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="modal font" tabindex="-1" role="dialog" id="helpModal" data-backdrop='static' data-keyboard='false'>
+        <div class="modal-dialog helpModalContainer" role="document">
+            <div class="modal-content helpModal">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="helpModalTitle"></h1>
+
+                </div>
+                <div class="modal-body" id="helpModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default modalButton" data-dismiss="modal"
+                        id="helpModalButton"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal font" tabindex="-1" role="dialog" id="completionModal" data-backdrop='static'
+        data-keyboard='false'>
+        <div class="modal-dialog modalContainer" role="document">
+            <div class="modal-content completionModal">
+                <div class="modal-header">
+                    <h1 class="modal-title">Congratulations</h1>
+                </div>
+                <div class="modal-body" id="completionModalBody">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default modalButton" data-dismiss="modal"
+                        id='modalNextLevelButton'>Next
+                        Level!</button>
+                    <button type="button" class="btn btn-default modalButton" data-dismiss="modal"
+                        id='modalNextLevelButton'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse font navMargin navbarText">
+        <div class="container-fluid">
+            <button class="btn btn-secondary navbar-btn material-icons" id="homeButton">home</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="runButton">play_arrow</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="stepButton">skip_next</button>
+            <button class="btn btn-secondary navbar-btn material-icons" id="resetButton">replay</button>
+            <ul class="nav navbar-nav navbar-right">
+                <h3 class="navbar-text" id="usernameSlot">greg the tester</h3>
+                <button class="btn btn-secondary navbar-btn material-icons"
+                    id="previousButton">keyboard_arrow_left</button>
+                <button class="btn btn-secondary navbar-btn material-icons"
+                    id="nextButton">keyboard_arrow_right</button>
+                <button class="btn btn-secondary navbar-btn material-icons" id="helpButton">help</button>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container-fluid font">
+        <div class="row firstRow margins">
+            <div class="col-sm-5">
+                <div id="levelInstructionArea">
+                    <!-- put words and details/instructions here -->
+                </div>
+                <div class="row topbuffer">
+                    <div class="blocklyDiv" id="blocklyDiv"></div>
+                </div>
+                <div class="row topbuffer">
+                    <div class="col-sm-9">
+                        <div class="errorArea" id="errorArea">
+                            <h3 id="errorAreaText"></h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="errorHighlight" id="errorHighlight"><button
+                                class="btn btn-warning errorHighlightButton material-icons"
+                                id="errorHighlightButton">error_outline
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="checklistArea" class="checklistArea">
+                            <h3>Include:</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row topbuffer">
+                    <div class="col-sm-12">
+                        <div class="container varArea">
+                            <div id="variableDisplayArea">
+                                <h3>Variables:</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <!-- for shelf and images -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="imageDiv" id="output" disabled="disabled">
+                            <table class="center centered imageTable" id="movementTable">
+                                <tr class="handRow">
+                                    <td id='td00'></td>
+                                    <td id='td01'></td>
+                                    <td id='td02'></td>
+                                    <td id='td03'></td>
+                                    <td id='td04'></td>
+                                </tr>
+                                <tr class="bookRow">
+                                    <td id='td10'></td>
+                                    <td id='td11'></td>
+                                    <td id='td12'></td>
+                                    <td id='td13'></td>
+                                    <td id='td14'></td>
+                                </tr>
+                                <tr class="bookRow">
+                                    <td id='td20'></td>
+                                    <td id='td21'></td>
+                                    <td id='td22'></td>
+                                    <td id='td23'></td>
+                                    <td id='td24'></td>
+                                </tr>
+                            </table>
+                            <img class="shelfImg" src="./media/shelf.svg" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="indexDisplay" disabled="disabled" style="display: table; height: 80px; width: 100%;">
+                            <table class="center indexTable" id="indexTable">
+                                <tr>
+                                    <td class="text-center" id='index0'>
+                                        <h1>0</h1>
+                                    </td>
+                                    <td class="text-center" id='index1'>
+                                        <h1>1</h1>
+                                    </td>
+                                    <td class="text-center" id='index2'>
+                                        <h1>2</h1>
+                                    </td>
+                                    <td class="text-center" id='index3'>
+                                        <h1>3</h1>
+                                    </td>
+                                    <td class="text-center" id='index4'>
+                                        <h1>4</h1>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+            <block type="controls_for">
+                <value name="FROM">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="TO">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="BY">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+            </block>
+        </category>
+        <category name="Hand" colour=15>
+            <block type="move_hand"></block>
+        </category>
+        <category name="Book" colour=60>
+            <block type="place_book"></block>
+        </category>
+    </xml>
+
+    <script>
+        var workspace = Blockly.inject('blocklyDiv',
+            {
+                media: 'https://blockly-demo.appspot.com/static/media/',
+                toolbox: document.getElementById('toolbox'),
+                scrollbars: true,
+                zoom:
+                {
+                    controls: true,
+                    wheel: true,
+                    startScale: 1.0,
+                    maxScale: 3,
+                    minScale: 0.3,
+                    scaleSpeed: 1.2
+                },
+                trashcan: true
+            });        
+    </script>
+    <script src="test1.js"></script>
+</body>
+
+</html>
